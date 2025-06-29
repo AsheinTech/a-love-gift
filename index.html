@@ -7,126 +7,135 @@
   <style>
     body {
       margin: 0;
-      background: black;
-      overflow: hidden;
+      background: #000;
       font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
 
-    .heart-container {
+    .container {
       position: relative;
       width: 300px;
-      height: 270px;
-      animation: pulse 2s infinite;
+      height: 300px;
+    }
+
+    .neon-ring, .neon-ring::before, .neon-ring::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      border: 2px dashed #00f7ff;
+      transform: translate(-50%, -50%);
+      animation: rotate 12s linear infinite;
+      opacity: 0.4;
+    }
+
+    .neon-ring {
+      width: 320px;
+      height: 320px;
+      border: 3px solid #00f7ff;
+      box-shadow: 0 0 20px #00f7ff, 0 0 60px #00f7ff inset;
+    }
+
+    .neon-ring::before {
+      width: 260px;
+      height: 260px;
+      animation-duration: 18s;
+    }
+
+    .neon-ring::after {
+      width: 200px;
+      height: 200px;
+      animation-duration: 25s;
     }
 
     .heart {
       position: absolute;
-      top: 0;
+      top: 50%;
+      left: 50%;
+      width: 180px;
+      height: 160px;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      background: radial-gradient(circle at 30% 30%, #00bfff, #004080);
+      border-radius: 50% 50% 0 0;
+      box-shadow: 0 0 20px #00f7ff, 0 0 40px #00f7ff inset;
+      animation: pulse 2s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 180px;
+      height: 160px;
+      border-radius: 50%;
+      background: inherit;
+    }
+
+    .heart::before {
+      top: -90px;
       left: 0;
-      width: 300px;
-      height: 270px;
-      background: radial-gradient(circle at 30% 30%, #1e90ff, #001f3f);
-      clip-path: path('M150 270 C80 200, 0 130, 75 75 A75 75 0 1 1 150 75 A75 75 0 1 1 225 75 C300 130, 220 200, 150 270 Z');
-      box-shadow: 0 0 30px #00f7ff, 0 0 60px #00f7ff inset;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    }
+
+    .heart::after {
+      top: 0;
+      left: 90px;
     }
 
     .heart-text {
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
       color: navy;
-      text-align: center;
-      font-size: 18px;
       font-weight: bold;
+      text-align: center;
       text-shadow: 0 0 10px #00ffff;
-      padding: 20px;
-    }
-
-    .neon-circle {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 400px;
-      height: 400px;
-      transform: translate(-50%, -50%);
-      border: 3px solid #00f7ff;
-      border-radius: 50%;
-      animation: rotate 10s linear infinite;
-      box-shadow: 0 0 20px #00f7ff, 0 0 60px #00f7ff inset;
-    }
-
-    .neon-circle::before,
-    .neon-circle::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 320px;
-      height: 320px;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      border: 2px dashed #00f7ff;
-      animation: rotate 15s linear infinite reverse;
-      opacity: 0.5;
-    }
-
-    .neon-circle::after {
-      width: 260px;
-      height: 260px;
-      animation-duration: 20s;
+      font-size: 16px;
+      padding: 10px;
     }
 
     .love-quote {
       position: absolute;
-      bottom: 40px;
+      bottom: 20px;
       width: 100%;
       text-align: center;
       color: #00f7ff;
-      font-size: 16px;
+      font-size: 14px;
       font-style: italic;
       text-shadow: 0 0 10px #00f7ff;
       animation: glow 3s ease-in-out infinite alternate;
     }
 
     @keyframes rotate {
-      0% {
-        transform: translate(-50%, -50%) rotate(0deg);
-      }
-      100% {
-        transform: translate(-50%, -50%) rotate(360deg);
-      }
-    }
-
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
-      }
-      to {
-        text-shadow: 0 0 20px #00f7ff, 0 0 40px #00f7ff;
-      }
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
 
     @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
+      0%, 100% { transform: translate(-50%, -50%) rotate(-45deg) scale(1); }
+      50% { transform: translate(-50%, -50%) rotate(-45deg) scale(1.1); }
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff; }
+      100% { text-shadow: 0 0 20px #00f7ff, 0 0 40px #00f7ff; }
     }
   </style>
 </head>
 <body>
-  <div class="heart-container">
-    <div class="neon-circle"></div>
+  <div class="container">
+    <div class="neon-ring"></div>
     <div class="heart">
-      <div class="heart-text">I love you<br/>Tadiwa Machawira</div>
+      <div class="heart-text">
+        I love you<br/>Tadiwa Machawira
+      </div>
     </div>
-    <div class="love-quote">"Every beat of my heart says your name, my forever flame."</div>
+    <div class="love-quote">"You’re the beat in my heart, the sparkle in my soul."</div>
   </div>
 </body>
   </html>
