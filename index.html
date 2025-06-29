@@ -16,6 +16,7 @@
       flex-direction: column;
       height: 100vh;
       text-align: center;
+      color: #00f7ff;
     }
 
     .neon-ring, .neon-ring::before, .neon-ring::after {
@@ -58,7 +59,6 @@
 
     .heart-text {
       margin-top: 10px;
-      color: navy;
       font-weight: bold;
       font-size: 20px;
       text-shadow: 0 0 15px #00ffff;
@@ -67,7 +67,6 @@
 
     .love-quote {
       margin-top: 25px;
-      color: #00f7ff;
       font-size: 16px;
       font-style: italic;
       text-shadow: 0 0 15px #00f7ff;
@@ -77,47 +76,46 @@
 
     .signature {
       position: absolute;
-      bottom: 20px;
+      bottom: 10px;
       width: 100%;
-      color: #ff80ff;
       font-size: 15px;
-      text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+      text-shadow: 0 0 10px #00cfff, 0 0 20px #00cfff;
       font-style: italic;
-      animation: glowPink 4s ease-in-out infinite alternate;
+      animation: glow 4s ease-in-out infinite alternate;
     }
 
-    /* Popup Message */
+    /* Popup Message in Top Right */
     .popup {
       position: fixed;
-      top: 30%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #111;
-      color: #00f7ff;
+      top: 20px;
+      right: 20px;
+      background: #0a0a0a;
       border: 2px solid #00f7ff;
+      padding: 15px 20px;
       border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 0 20px #00f7ff;
       z-index: 9999;
-      text-align: center;
+      box-shadow: 0 0 20px #00f7ff;
       animation: glow 2s infinite alternate;
     }
 
     .popup button {
       margin-top: 10px;
-      padding: 8px 20px;
+      padding: 6px 14px;
       border: none;
       background: #00f7ff;
-      color: black;
+      color: #000;
       font-weight: bold;
       border-radius: 5px;
       cursor: pointer;
       box-shadow: 0 0 10px #00f7ff;
     }
 
-    /* Reveal button */
+    /* Reveal button at bottom */
     #reveal-btn {
-      margin-top: 20px;
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
       padding: 10px 25px;
       font-size: 16px;
       border: none;
@@ -134,16 +132,15 @@
     #secret-message {
       display: none;
       margin-top: 20px;
-      color: pink;
+      color: #66ccff;
       font-size: 16px;
-      text-shadow: 0 0 10px pink, 0 0 20px pink;
+      text-shadow: 0 0 10px #66ccff;
     }
 
-    /* Falling Hearts */
     .heart-fall {
       position: fixed;
       top: -50px;
-      color: #ff69b4;
+      color: #00cfff;
       font-size: 24px;
       animation: fall linear infinite;
     }
@@ -170,23 +167,18 @@
       100% { text-shadow: 0 0 20px #00f7ff, 0 0 40px #00f7ff; }
     }
 
-    @keyframes glowPink {
-      0% { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
-      100% { text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff; }
-    }
-
     audio {
       display: none;
     }
   </style>
 </head>
-<body>
+<body onclick="playMusic()">
   <!-- Falling Hearts -->
   <script>
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 25; i++) {
       const heart = document.createElement("div");
       heart.className = "heart-fall";
-      heart.textContent = "💖";
+      heart.textContent = "💙";
       heart.style.left = Math.random() * 100 + "vw";
       heart.style.animationDuration = (2 + Math.random() * 3) + "s";
       heart.style.fontSize = (16 + Math.random() * 24) + "px";
@@ -199,30 +191,36 @@
   <div class="heart-text">I love you<br/>Tadiwa Machawira</div>
   <div class="love-quote">"Every beat of my heart whispers your name, my forever flame."</div>
 
-  <!-- Click to Reveal -->
+  <!-- Reveal Button -->
   <button id="reveal-btn">💌 Click to Reveal a Secret</button>
   <div id="secret-message">I dream of growing old with you... every single day. 💑</div>
 
   <!-- Signature -->
   <div class="signature">From Ashein Ishhod Tashinga ❤️</div>
 
-  <!-- Popup Love Message -->
+  <!-- Popup -->
   <div class="popup" id="popup">
-    <p>🌟 You are deeply loved, Tadiwa. 💙</p>
+    <p>💙 You are deeply loved, Tadiwa 💙</p>
     <button onclick="document.getElementById('popup').style.display='none'">Aww 💕</button>
   </div>
 
-  <!-- Romantic Background Music -->
-  <audio autoplay loop>
+  <!-- Background Music -->
+  <audio id="romantic-music" loop>
     <source src="https://dl.sndup.net/xt6v/RomanticBackground.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
   <script>
     document.getElementById("reveal-btn").addEventListener("click", function () {
-      const secret = document.getElementById("secret-message");
-      secret.style.display = "block";
+      document.getElementById("secret-message").style.display = "block";
     });
+
+    function playMusic() {
+      const music = document.getElementById("romantic-music");
+      if (music.paused) {
+        music.play().catch(() => {});
+      }
+    }
   </script>
 </body>
   </html>
