@@ -36,12 +36,17 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  background: conic-gradient(from 0deg, #6dd5ed, #2193b0, #0f2027);
-  animation: hueRotate 10s linear infinite;
+  background: conic-gradient(from 0deg, #6dd5ed, #00f7ff, #6dd5ed);
+  animation: rotateRing 10s linear infinite;
   box-shadow:
     0 0 20px #6dd5ed,
-    0 0 40px #2193b0,
-    0 0 60px #0f2027;
+    0 0 40px #00f7ff,
+    0 0 60px #6dd5ed;
+}
+
+@keyframes rotateRing {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .emoji-heart {
@@ -171,11 +176,6 @@
   }
 }
 
-@keyframes hueRotate {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
-}
-
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.15); }
@@ -257,7 +257,6 @@ setInterval(() => {
   setTimeout(() => heart.remove(), 6000);
 }, 400);
 
-// Generate stars
 for (let i = 0; i < 80; i++) {
   const star = document.createElement("div");
   star.className = "star";
