@@ -6,7 +6,7 @@
   <style>
     body {
       margin: 0;
-      background: radial-gradient(ellipse at bottom, #0b0c1a 0%, #000000 100%);
+      background: linear-gradient(to top, #000011, #0b0c1a);
       background-size: cover;
       font-family: 'Segoe UI', sans-serif;
       overflow: hidden;
@@ -25,6 +25,22 @@
   border-radius: 50%;
   animation: twinkle 2s infinite ease-in-out;
   opacity: 0.8;
+}
+
+.constellation {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #6dd5ed;
+  border-radius: 50%;
+}
+
+.constellation-line {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #6dd5ed;
+  transform-origin: top left;
 }
 
 @keyframes twinkle {
@@ -110,6 +126,7 @@
 }
 
 #poem-box {
+  display: none;
   width: 90%;
   max-width: 500px;
   max-height: 200px;
@@ -125,6 +142,12 @@
   font-size: 14px;
   line-height: 1.6;
   z-index: 2;
+  animation: fadeIn 2s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .sparkle {
@@ -148,32 +171,17 @@
 }
 
 @keyframes floatHeart {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-120vh) scale(1.5);
-    opacity: 0;
-  }
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
 }
 
 @keyframes sparkle {
-  to {
-    opacity: 0;
-    transform: scale(3);
-  }
+  to { opacity: 0; transform: scale(3); }
 }
 
 @keyframes floatQuote {
-  0% {
-    top: 100%;
-    left: 10%;
-  }
-  100% {
-    top: -10%;
-    left: 90%;
-  }
+  0% { top: 100%; left: 10%; }
+  100% { top: -10%; left: 90%; }
 }
 
 @keyframes pulse {
@@ -199,7 +207,7 @@ audio {
   <div id="floating-quote" class="love-quote">"You’re the poem my heart always wanted to write."</div>
   <button id="reveal-btn">💌 Click to Reveal a Secret</button>
   <div id="secret-message">I dream of growing old with you... every single day. 💑</div>
-  <div id="poem-box" style="display: none;">
+  <div id="poem-box">
     <p>
       <strong>You, the Flame I Bleed</strong><br><br>
       I have loved you in silences that broke me,<br>
